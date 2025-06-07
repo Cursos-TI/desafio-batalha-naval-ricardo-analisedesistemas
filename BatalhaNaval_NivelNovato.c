@@ -32,7 +32,15 @@ for(int i = 0 ; i < 10;i++){
         
         printf("\n");
     }
-
+//imprime ass cooordenadas em que estão os navios
+printf("\nCoordenadas dos Navios:\n");
+for(int i = 0; i < 10; i++){
+    for(int j = 0;j < 10; j++){
+        if(tabuleiro[i][j] == 1){
+            printf("(%d, %c)", i, letras[j]);
+        }
+    }
+}
 
 
 }
@@ -46,8 +54,8 @@ char letras[11] = {'A','B','C','D','E','F','G','H','I','J'};
 
 criatbuleiro(tabuleiro,10);
 
-inserenavio(tabuleiro,3,2,2,1);
-inserenavio(tabuleiro,3,7,2,0);
+inserenavio(tabuleiro,3,2,2,1);//tamanho, linha,coluna, orientação
+inserenavio(tabuleiro,3,9,9,1);
 
 imprimetabuleiro(tabuleiro,letras);
 
@@ -70,12 +78,12 @@ int inserenavio(int tabuleiro[10][10], int tamanho, int linha, int coluna, int o
     
     // Verifica se o navio cabe na orientação escolhida
     if(orientacao == 0 && (coluna + tamanho) > 10) {
-        printf("Não cabe na horizontal, está fora do tamnho fixo da matriz!!\n");
+        printf("Não cabe na horizontal, está fora do tamanho fixo da matriz!!\n");
         getchar();
         return 0; // Não cabe na horizontal
     }
     if(orientacao == 1 && (linha + tamanho) > 10) {
-        printf("Não cabe na vertical, está fora do tamnho fixo da matriz!!\n");
+        printf("Não cabe na vertical, está fora do tamanho fixo da matriz!!\n");
         getchar();
         return 0; // Não cabe na vertical
     }
