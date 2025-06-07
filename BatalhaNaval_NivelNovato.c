@@ -15,14 +15,13 @@ void criatbuleiro(int tabuleiro[10][10],int linhas){//esse argumento assume que 
 int inserenavio(int tabuleiro[10][10], int tamanho, int linha, int coluna, int oritentacao);
 
 void imprimetabuleiro(int tabuleiro[10][10],char letras[10]){ //ou tabuleiro[][10]
-//coloca os caracteres sobre cada posição de cada elemento da primeira linha
+//imprime,posiciona e alinha os caracteres de 'A' a 'J' sobre as colunas do tabuleiro
 printf(" /-------BATALHA NAVAL--------/\n");
 for(int i = 0; i < 10;i++){ 
-    //printf("");
     printf("  %c",letras[i]);
 }
     printf("\n");
-
+//imprime o número identificador e correspondente para cada linha de 0 a 9
 for(int i = 0 ; i < 10;i++){
     printf("%2d  ", i - 0);
     for(int j = 0; j < 10;j++){
@@ -37,7 +36,7 @@ printf("\nCoordenadas dos Navios:\n");
 for(int i = 0; i < 10; i++){
     for(int j = 0;j < 10; j++){
         if(tabuleiro[i][j] == 1){
-            printf("(%d, %c)", i, letras[j]);
+            printf("(Linha:%d, Coluna:%c) ", i, letras[j]);
         }
     }
 }
@@ -51,11 +50,12 @@ int main(int argc, char const *argv[]){
 
 int  tabuleiro[10][10];//(*tabuleiro)[10] se declarar como ponteiro de arrays o compilador exige alocação dinamica de memoria
 char letras[11] = {'A','B','C','D','E','F','G','H','I','J'};
+int tamanhonavio = 3;
 
 criatbuleiro(tabuleiro,10);
 
-inserenavio(tabuleiro,3,2,2,1);//tamanho, linha,coluna, orientação
-inserenavio(tabuleiro,3,9,9,1);
+inserenavio(tabuleiro,tamanhonavio,2,2,1);//tamanho, linha,coluna, orientação
+inserenavio(tabuleiro,tamanhonavio,9,0,0);
 
 imprimetabuleiro(tabuleiro,letras);
 
@@ -108,11 +108,9 @@ int inserenavio(int tabuleiro[10][10], int tamanho, int linha, int coluna, int o
 // Insere o navio
     for(int i = 0; i < tamanho; i++) {
         if(orientacao == 0) { // Horizontal
-            tabuleiro[linha][coluna + i] = 1;
-        //printf("Navio inserido com sucesso!Na posição horizontal!");
+            tabuleiro[linha][coluna + i] = 1;//se posição for horizontal = na mesma linha  preenche colunas
         } else { // Vertical
-            tabuleiro[linha + i][coluna] = 1;
-            //printf("Navio inserido com sucesso!Na posição vertical!");
+            tabuleiro[linha + i][coluna] = 1;//se posição for vertical = na mesma coluna  preenche linhas
         }
     }
     
