@@ -16,15 +16,15 @@ int inserenavio(int tabuleiro[10][10], int tamanho, int linha, int coluna, int o
 
 void imprimetabuleiro(int tabuleiro[10][10],char letras[10]){ //ou tabuleiro[][10]
 //coloca os caracteres sobre cada posição de cada elemento da primeira linha
-printf(" /-------BATALHA NAVAL--------/\n");
-for(int i = 0; i < 10;i++){ 
+printf(" /-------BATALHA NAVAL---------/\n\n");
+for(int i = 0; i < 11;i++){ 
     //printf("");
-    printf("  %c",letras[i]);
+    printf("%-3c",letras[i]);
 }
     printf("\n");
 
 for(int i = 0 ; i < 10;i++){
-    printf("%2d  ", i - 0);
+    printf("%2d ", i - 0);
     for(int j = 0; j < 10;j++){
         tabuleiro[i][j];
         printf("%d  ", tabuleiro[i][j]);
@@ -33,21 +33,30 @@ for(int i = 0 ; i < 10;i++){
         printf("\n");
     }
 
-
-
+// Imprime coordenadas dos navios
+    printf("\nCoordenadas dos Navios:\n");
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 10; j++) {
+            if(tabuleiro[i][j] == 3) {
+                printf("(%d, %c) ", i, letras[j]);
+            }
+        }
+    }
+    printf("\n");
 }
-
 
 
 int main(int argc, char const *argv[]){
 
 int  tabuleiro[10][10];//(*tabuleiro)[10] se declarar como ponteiro de arrays o compilador exige alocação dinamica de memoria
-char letras[11] = {'A','B','C','D','E','F','G','H','I','J'};
-
+char letras[11] = {' ','A','B','C','D','E','F','G','H','I','J'};
+int tamanho = 3;
+int navio1, navio2,navio3;
 criatbuleiro(tabuleiro,10);
 
-inserenavio(tabuleiro,3,2,2,1);
-inserenavio(tabuleiro,3,9,9,0);
+navio1 = inserenavio(tabuleiro,tamanho,0,3,1);
+navio2 = inserenavio(tabuleiro,tamanho,9,0,0);
+navio3 = inserenavio(tabuleiro,tamanho,5,4,2);
 
 imprimetabuleiro(tabuleiro,letras);
 
@@ -70,14 +79,20 @@ int inserenavio(int tabuleiro[10][10], int tamanho, int linha, int coluna, int o
     
     // Verifica se o navio cabe na orientação escolhida
     if(orientacao == 0 && (coluna + tamanho) > 10) {
-        printf("Não cabe na horizontal, está fora do tamnho fixo da matriz!!\n");
+        printf("Não cabe na horizontal, está fora do tamanho fixo da matriz!!\n");
         getchar();
         return 0; // Não cabe na horizontal
     }
     if(orientacao == 1 && (linha + tamanho) > 10) {
-        printf("Não cabe na vertical, está fora do tamnho fixo da matriz!!\n");
+        printf("Não cabe na vertical, está fora do tamanho fixo da matriz!!\n");
         getchar();
         return 0; // Não cabe na vertical
+    }
+    
+    if(orientacao == 2 && ((linha + tamanho)>10 || (coluna + tamanho)>10)){
+        printf("Não cabe na diagonal, está fora do tamanho fixo da matriz!!\n");
+        getchar();
+        return 0;
     }
     
     // Verifica se já não há navio nessas posições
@@ -88,8 +103,14 @@ int inserenavio(int tabuleiro[10][10], int tamanho, int linha, int coluna, int o
                 getchar();
                 return 0; // Já tem navio aqui
             }
-        } else { // Vertical
+        } else if(orientacao == 1) { // Vertical
             if(tabuleiro[linha + i][coluna] != 0) {
+                printf("Já tem navio aqui!!");
+                getchar();
+                return 0; // Já tem navio aqui
+            }
+        } else { // Diagonal
+            if(tabuleiro[linha + i][coluna + i] != 0) {
                 printf("Já tem navio aqui!!");
                 getchar();
                 return 0; // Já tem navio aqui
@@ -100,11 +121,13 @@ int inserenavio(int tabuleiro[10][10], int tamanho, int linha, int coluna, int o
 // Insere o navio
     for(int i = 0; i < tamanho; i++) {
         if(orientacao == 0) { // Horizontal
-            tabuleiro[linha][coluna + i] = 3;
+            tabuleiro[linha][coluna + i] = 3;// se posição for horizontal =  mesma linha preenche 3 colunas
         //printf("Navio inserido com sucesso!Na posição horizontal!");
-        } else { // Vertical
-            tabuleiro[linha + i][coluna] = 3;
+        } else if(orientacao == 1){ // Vertical
+            tabuleiro[linha + i][coluna] = 3;//se posição for vertical =  mesma coluna preenche 3 linhas
             //printf("Navio inserido com sucesso!Na posição vertical!");
+        }else{
+            tabuleiro[linha+i][coluna+i] = 3;
         }
     }
     
