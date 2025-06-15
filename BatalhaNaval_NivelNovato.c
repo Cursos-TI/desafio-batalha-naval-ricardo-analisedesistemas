@@ -54,9 +54,9 @@ int tamanho = 3;
 int navio1, navio2,navio3;
 criatbuleiro(tabuleiro,10);
 
-navio1 = inserenavio(tabuleiro,tamanho,0,3,1);
-navio2 = inserenavio(tabuleiro,tamanho,9,0,0);
-navio3 = inserenavio(tabuleiro,tamanho,5,4,2);
+navio1 = inserenavio(tabuleiro,tamanho,0,3,1);//orientação 1 vertical
+navio2 = inserenavio(tabuleiro,tamanho,9,0,0);//oritentação 0 horizontal
+navio3 = inserenavio(tabuleiro,tamanho,5,4,2);//oritentação 2 diagonal
 
 imprimetabuleiro(tabuleiro,letras);
 
