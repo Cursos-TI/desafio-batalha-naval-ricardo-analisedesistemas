@@ -42,10 +42,8 @@ for(int i = 0 ; i < 10;i++){
    printf("\nCoordenadas dos Navios:\n");
     for(int i = 0; i <= 9; i++) {
         for(int j = 0; j < 11; j++) {
-            if(tabuleiro[i][j] == 1) {
-                printf("(Linha:%d|Coluna:%c) \n",i,letras[j]+1);
-            }else if(tabuleiro[i][j] == 3){
-               printf("(Linha:%d|Coluna:%c) ",i,letras[j]+1);
+            if(tabuleiro[i][j] == 3) {
+                printf("(Linha:%d|Coluna:%c) \n",i,letras[j] + 1);
             }
         }
         
@@ -62,10 +60,10 @@ int tamanho = 3;
 int navio1, navio2,navio3,navio4;
 criatbuleiro(tabuleiro,10);
 
-navio1 = inserenavio(tabuleiro,tamanho,0,2,3);//linha 5, coluna 2, orientação 3 diagonal secundária
-navio2 = inserenavio(tabuleiro,tamanho,0,7,2);//linha 7, coluna 0, orientação 1 vertical
-navio3 = inserenavio(tabuleiro,tamanho,9,7,0);//linha 9, coluna 7, orientação 0 horizontal
-navio4 = inserenavio(tabuleiro,tamanho,7,4,1);//linha 0, coluna 4, orientação 2 diagonal primária
+navio1 = inserenavio(tabuleiro,tamanho,3,4,3);//linha 0, coluna 2, orientação 3 diagonal direita p/ esuqerda
+navio2 = inserenavio(tabuleiro,tamanho,0,7,2);//linha 0, coluna 7, orientação 2 diagonal esquerda p/ direita
+navio3 = inserenavio(tabuleiro,tamanho,7,6,0);//linha 9, coluna 7, orientação 0 horizontal
+navio4 = inserenavio(tabuleiro,tamanho,7,4,1);//linha 0, coluna 4, orientação 1 vertical
 imprimetabuleiro(tabuleiro,letras);
 
 
